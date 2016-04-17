@@ -21,12 +21,18 @@
     <ClInclude Include="Include\System\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\System\ConsoleKeyInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ConsoleKeyInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

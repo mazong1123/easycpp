@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\System\Console.h" />
+    <ClInclude Include="Include\System\ConsoleKeyInfo.h" />
     <ClInclude Include="Include\System\String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Console.cpp" />
+    <ClCompile Include="Src\ConsoleKeyInfo.cpp" />
     <ClCompile Include="Src\String.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
