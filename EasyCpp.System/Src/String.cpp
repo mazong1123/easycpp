@@ -44,5 +44,21 @@ namespace EasyCpp
             os << str.m_internalString;
             return os;
         }
+
+        bool String::operator==(const String& rhs)
+        {
+            return this->m_internalString == rhs.m_internalString;
+        }
+
+        bool String::operator!=(const String& rhs)
+        {
+            return !this->operator==(rhs);
+        }
+
+        int String::IndexOf(const String& value)
+        {
+            // TODO:
+            return -1;
+        }
     }
 }

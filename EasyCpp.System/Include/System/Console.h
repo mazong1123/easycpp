@@ -1,7 +1,9 @@
 #ifndef EASYCPP_SYSTEM_CONSOLE_H_
 #define EASYCPP_SYSTEM_CONSOLE_H_
 
+#include <memory>
 #include "System\String.h"
+#include "System\ConsoleKeyInfo.h"
 
 namespace EasyCpp
 {
@@ -46,6 +48,8 @@ namespace EasyCpp
             static void Write(String value);
 
             static void WriteLine();
+
+            static std::shared_ptr<ConsoleKeyInfo> Readkey();
         };
     }
 }
