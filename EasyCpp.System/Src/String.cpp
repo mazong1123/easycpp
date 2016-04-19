@@ -57,8 +57,35 @@ namespace EasyCpp
 
         int String::IndexOf(const String& value)
         {
-            // TODO:
-            return -1;
+            return this->IndexOf(value, 0);
+        }
+
+        int String::IndexOf(const String& value, int startIndex)
+        {
+            auto loc = this->m_internalString.find(value.m_internalString, startIndex);
+            if (loc == std::string::npos)
+            {
+                return -1;
+            }
+
+            if (loc > INT_MAX)
+            {
+                throw std::overflow_error("The index is larger than INT_MAX");
+            }
+
+            int locInt = static_cast<int>(loc);
+
+            return locInt;
+        }
+
+        bool String::EndsWith(const String& value)
+        {
+            if (value.m_internalString.size() > this->m_internalString.size())
+            {
+                return false;
+            }
+
+            return std::equal(value.m_internalString.rbegin(), value.m_internalString.rend(), this->m_internalString.rbegin());
         }
     }
 }

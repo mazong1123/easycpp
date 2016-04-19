@@ -21,6 +21,9 @@ namespace EasyCpp
             friend std::ostream& operator<<(std::ostream& os, const String& str);
 
             int IndexOf(const String& value);
+            int IndexOf(const String& value, int startIndex);
+
+            bool EndsWith(const String& value);
         private:
             std::string m_internalString;
         };
