@@ -8,7 +8,7 @@
 
 using std::cout;
 using std::endl;
-using std::shared_ptr;
+
 namespace EasyCpp
 {
     namespace System
@@ -38,7 +38,7 @@ namespace EasyCpp
             cout << endl;
         }
 
-        shared_ptr<ConsoleKeyInfo> Console::Readkey()
+        ConsoleKeyInfoPtr Console::Readkey()
         {
             int keyValue = -1;
 #ifdef _WIN32
@@ -47,7 +47,7 @@ namespace EasyCpp
             keyValue = getchar();
 #endif
             // TODO:
-            shared_ptr<ConsoleKeyInfo> consoleKeyInfoPtr(new ConsoleKeyInfo());
+            ConsoleKeyInfoPtr consoleKeyInfoPtr(new ConsoleKeyInfo());
 
             return consoleKeyInfoPtr;
         }
