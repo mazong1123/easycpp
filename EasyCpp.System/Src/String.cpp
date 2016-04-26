@@ -55,6 +55,20 @@ namespace EasyCpp
             return !this->operator==(rhs);
         }
 
+        String& String::operator+=(const String& rhs)
+        {
+            this->m_internalString += rhs.m_internalString;
+
+            return *this;
+        }
+
+        String String::operator+(const String& rhs)
+        {
+            String newString(this->m_internalString + rhs.m_internalString);
+
+            return newString;
+        }
+
         int String::IndexOf(const String& value)
         {
             return this->IndexOf(value, 0);

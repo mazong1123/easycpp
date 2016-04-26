@@ -27,6 +27,14 @@ int main()
     Console::Write(s3.EndsWith("def"));
     Console::Write(s3.EndsWith("def1"));
 
+    String s4 = "s4";
+    s4 += "temp";
+    Console::Write(s4);
+
+    String s5 = "s5";
+
+    Console::Write(s4 + s5 + s4);
+
     auto keyInfo = Console::Readkey();
 
     return 0;

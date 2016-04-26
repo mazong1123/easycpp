@@ -18,6 +18,9 @@ namespace EasyCpp
             String& operator=(const String& rhs);
             bool operator==(const String& rhs);
             bool operator!=(const String& rhs);
+            String& operator+=(const String& rhs);
+            String operator+(const String& rhs);
+
             friend std::ostream& operator<<(std::ostream& os, const String& str);
 
             int IndexOf(const String& value);
