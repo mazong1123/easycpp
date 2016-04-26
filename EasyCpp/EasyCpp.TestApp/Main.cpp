@@ -2,6 +2,9 @@
 
 using EasyCpp::System::Console;
 using EasyCpp::System::String;
+using EasyCpp::System::Object;
+using EasyCpp::System::Params;
+using EasyCpp::System::ObjectPtr;
 int main()
 {
     Console::Write(2);
@@ -26,6 +29,20 @@ int main()
     String s3 = "abcdef";
     Console::Write(s3.EndsWith("def"));
     Console::Write(s3.EndsWith("def1"));
+
+    String s4 = "s4";
+    s4 += "temp";
+    Console::Write(s4);
+
+    String s5 = "s5";
+
+    Console::Write(s4 + s5 + s4);
+
+    Params args;
+    args.push_back(ObjectPtr(new String("dd")));
+
+    auto formattedString = String::Format("abc{0}", args);
+    Console::Write(String("Formated String: ") + *formattedString);
 
     auto keyInfo = Console::Readkey();
 

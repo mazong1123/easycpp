@@ -1,7 +1,11 @@
+#include <cstdarg>
 #include <ostream>
+#include <stdexcept>
 #include "System\String.h"
 
 using std::ostream;
+using std::shared_ptr;
+using std::vector;
 
 namespace EasyCpp
 {
@@ -39,6 +43,15 @@ namespace EasyCpp
             return *this;
         }
 
+        String& String::operator=(const char* rhs)
+        {
+            std::string s(rhs);
+
+            this->m_internalString = s;
+
+            return *this;
+        }
+
         ostream& operator<<(ostream& os, const String& str)
         {
             os << str.m_internalString;
@@ -55,12 +68,26 @@ namespace EasyCpp
             return !this->operator==(rhs);
         }
 
-        int String::IndexOf(const String& value)
+        String& String::operator+=(const String& rhs)
+        {
+            this->m_internalString += rhs.m_internalString;
+
+            return *this;
+        }
+
+        String String::operator+(const String& rhs)
+        {
+            String newString(this->m_internalString + rhs.m_internalString);
+
+            return newString;
+        }
+
+        int String::IndexOf(const String& value) const
         {
             return this->IndexOf(value, 0);
         }
 
-        int String::IndexOf(const String& value, int startIndex)
+        int String::IndexOf(const String& value, int startIndex) const
         {
             auto loc = this->m_internalString.find(value.m_internalString, startIndex);
             if (loc == std::string::npos)
@@ -86,6 +113,42 @@ namespace EasyCpp
             }
 
             return std::equal(value.m_internalString.rbegin(), value.m_internalString.rend(), this->m_internalString.rbegin());
+        }
+
+        StringPtr String::Format(const String& format, const Params& args)
+        {
+            // Find place holder indexes.
+            vector<int> placeHolderIndexes;
+            int startIndex = 0;
+            do
+            {
+                startIndex = format.IndexOf("{", startIndex);
+                if (startIndex < 0)
+                {
+                    break;
+                }
+
+                int endIndex = format.IndexOf("}", startIndex);
+                if (endIndex < 0)
+                {
+                    break;
+                }
+
+                placeHolderIndexes.push_back(startIndex);
+
+                startIndex = endIndex;
+            } while (true);
+
+            if (args.size() != placeHolderIndexes.size())
+            {
+                throw std::invalid_argument("Arguments count do not match the format string.");
+            }
+
+            // TODO:
+
+            StringPtr formattedString(new String(format));
+
+            return formattedString;
         }
     }
 }

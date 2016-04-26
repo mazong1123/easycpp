@@ -4,12 +4,13 @@
 #include <memory>
 #include "System\String.h"
 #include "System\ConsoleKeyInfo.h"
+#include "System\Object.h"
 
 namespace EasyCpp
 {
     namespace System
     {
-        class Console
+        class Console : public Object
         {
         public:
             //
@@ -49,7 +50,7 @@ namespace EasyCpp
 
             static void WriteLine();
 
-            static std::shared_ptr<ConsoleKeyInfo> Readkey();
+            static ConsoleKeyInfoPtr Readkey();
         };
     }
 }
