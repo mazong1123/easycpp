@@ -26,10 +26,6 @@ int main()
     Console::Write(s2.IndexOf("e", 2));
     Console::Write(s2.IndexOf("i", 2));
 
-    String s3 = "abcdef";
-    Console::Write(s3.EndsWith("def"));
-    Console::Write(s3.EndsWith("def1"));
-
     String s4 = "s4";
     s4 += "temp";
     Console::Write(s4);
