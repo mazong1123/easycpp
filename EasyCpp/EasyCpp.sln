@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EasyCpp.System", "..\EasyCpp.System\EasyCpp.System.vcxproj", "{5251B0E4-BE03-4E6E-9CAC-38D621A22DC0}"
 EndProject
@@ -9,6 +9,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EasyCpp.TestApp", "EasyCpp.
 	ProjectSection(ProjectDependencies) = postProject
 		{5251B0E4-BE03-4E6E-9CAC-38D621A22DC0} = {5251B0E4-BE03-4E6E-9CAC-38D621A22DC0}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gteststarter", "..\tests\gteststarter.vcxproj", "{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5} = {34681F0D-CE45-415D-B5F2-5C662DFE3BD5}
+		{5251B0E4-BE03-4E6E-9CAC-38D621A22DC0} = {5251B0E4-BE03-4E6E-9CAC-38D621A22DC0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gmock", "..\tests\googlemock\msvc\2005\gmock.vcxproj", "{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +42,18 @@ Global
 		{2B16E3CE-9083-4E94-AF6E-1453F5F4805B}.Release|x64.Build.0 = Release|x64
 		{2B16E3CE-9083-4E94-AF6E-1453F5F4805B}.Release|x86.ActiveCfg = Release|Win32
 		{2B16E3CE-9083-4E94-AF6E-1453F5F4805B}.Release|x86.Build.0 = Release|Win32
+		{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}.Debug|x64.ActiveCfg = Debug|Win32
+		{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}.Debug|x86.ActiveCfg = Debug|Win32
+		{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}.Debug|x86.Build.0 = Debug|Win32
+		{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}.Release|x64.ActiveCfg = Release|Win32
+		{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}.Release|x86.ActiveCfg = Release|Win32
+		{CAA38BD9-C0BE-471A-BA3A-28F14054AA80}.Release|x86.Build.0 = Release|Win32
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Debug|x64.ActiveCfg = Debug|Win32
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Debug|x86.ActiveCfg = Debug|Win32
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Debug|x86.Build.0 = Debug|Win32
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Release|x64.ActiveCfg = Release|Win32
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Release|x86.ActiveCfg = Release|Win32
+		{34681F0D-CE45-415D-B5F2-5C662DFE3BD5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
