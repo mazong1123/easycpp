@@ -88,4 +88,32 @@ namespace EasyCppTest
         // Assert
         EXPECT_EQ(expected, actual);
     }
+
+    TEST_F(SystemStringTestFixture, SystemStringToStdStringTest)
+    {
+        // Prepare
+        String testStr("helelo1");
+
+        std::string expected("helelo1");
+
+        // Act
+        std::string actual = testStr.ToStdString();
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringToStringTest)
+    {
+        // Prepare
+        String testStr("helelo1");
+
+        String expected("helelo1");
+
+        // Act
+        String actual = *testStr.ToString();
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
 }
