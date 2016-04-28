@@ -1,5 +1,7 @@
 #include "System\Object.h"
 
+using std::string;
+
 namespace EasyCpp
 {
     namespace System
@@ -14,6 +16,11 @@ namespace EasyCpp
 
         Object::~Object()
         {
+        }
+
+        string Object::ToStdString()
+        {
+            return "System.Object";
         }
     }
 }

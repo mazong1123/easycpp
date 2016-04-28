@@ -6,6 +6,7 @@
 using std::ostream;
 using std::shared_ptr;
 using std::vector;
+using std::string;
 
 namespace EasyCpp
 {
@@ -17,7 +18,7 @@ namespace EasyCpp
         }
 
         String::String(const std::string& str)
-            :m_internalString(str)
+            : m_internalString(str)
         {
         }
 
@@ -58,12 +59,12 @@ namespace EasyCpp
             return os;
         }
 
-        bool String::operator==(const String& rhs)
+        bool String::operator==(const String& rhs) const
         {
             return this->m_internalString == rhs.m_internalString;
         }
 
-        bool String::operator!=(const String& rhs)
+        bool String::operator!=(const String& rhs) const
         {
             return !this->operator==(rhs);
         }
@@ -113,6 +114,18 @@ namespace EasyCpp
             }
 
             return std::equal(value.m_internalString.rbegin(), value.m_internalString.rend(), this->m_internalString.rbegin());
+        }
+
+        string String::ToStdString()
+        {
+            return this->m_internalString;
+        }
+
+        StringPtr String::ToString()
+        {
+            // TODO: Need enhancement here. We don't want to construct a new String object.
+            StringPtr str(new String(*this));
+            return str;
         }
 
         StringPtr String::Format(const String& format, const Params& args)
