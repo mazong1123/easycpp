@@ -201,16 +201,16 @@ namespace EasyCpp
                     break;
                 }
 
-                string placeHolderIndex = format.m_internalString.substr(startIndex + 1, endIndex - startIndex - 1);
-                long placeHolderIndexValue = atol(placeHolderIndex.c_str());
+                StringPtr placeHolderIndex = format.SubString(startIndex + 1, endIndex - startIndex - 1);
+                long placeHolderIndexValue = atol(placeHolderIndex->m_internalString.c_str());
                 if (placeHolderIndexValue >= (long)args.size())
                 {
                     throw std::invalid_argument("Format place holder indexes are out of range.");
                 }
 
-                string placeHolderString = format.m_internalString.substr(startIndex, endIndex - startIndex + 1);
+                StringPtr placeHolderString = format.SubString(startIndex, endIndex - startIndex + 1);
 
-                placeHolderIndexes.insert(std::make_pair(placeHolderIndexValue, placeHolderString));
+                placeHolderIndexes.insert(std::make_pair(placeHolderIndexValue, *placeHolderString));
 
                 startIndex = endIndex;
             } while (true);
