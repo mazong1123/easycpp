@@ -116,4 +116,32 @@ namespace EasyCppTest
         // Assert
         EXPECT_EQ(expected, actual);
     }
+
+    TEST_F(SystemStringTestFixture, SystemStringReplaceSingleSuccessTest)
+    {
+        // Prepare
+        String testStr("helelo1");
+
+        String expected("heleaa");
+
+        // Act
+        String actual = *testStr.Replace("lo1", "aa");
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringReplaceMultipleSuccessTest)
+    {
+        // Prepare
+        String testStr("helelo1");
+
+        String expected("hbbbbo1");
+
+        // Act
+        String actual = *testStr.Replace("el", "bb");
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
 }
