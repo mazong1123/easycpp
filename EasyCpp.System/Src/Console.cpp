@@ -13,6 +13,10 @@ namespace EasyCpp
 {
     namespace System
     {
+        Console::~Console()
+        {
+        }
+
         void Console::Write(int value)
         {
             cout << value << endl;

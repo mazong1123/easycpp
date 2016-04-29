@@ -23,6 +23,7 @@ namespace EasyCpp
             String(const std::string& str);
             String(const char* str);
             String(const String& rhs);
+            virtual ~String();
             String& operator=(const String& rhs);
             String& operator=(const char* rhs);
             bool operator==(const String& rhs) const;
@@ -34,6 +35,8 @@ namespace EasyCpp
 
             int IndexOf(const String& value) const;
             int IndexOf(const String& value, int startIndex) const;
+
+            StringPtr SubString(int startIndex, int length) const;
 
             bool EndsWith(const String& value);
 

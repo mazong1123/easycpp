@@ -51,6 +51,11 @@ namespace EasyCpp
             static void WriteLine();
 
             static ConsoleKeyInfoPtr Readkey();
+
+        private:
+            Console() = delete;
+            Console(const Console& rhs) = delete;
+            ~Console();
         };
     }
 }
