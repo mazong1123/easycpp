@@ -1,6 +1,7 @@
 #include <ostream>
 #include <stdexcept>
 #include <algorithm>
+#include <map>
 #include "System\String.h"
 
 using std::ostream;
@@ -8,6 +9,7 @@ using std::shared_ptr;
 using std::vector;
 using std::string;
 using std::replace;
+using std::map;
 
 namespace EasyCpp
 {
@@ -31,6 +33,10 @@ namespace EasyCpp
         String::String(const String& rhs)
         {
             this->m_internalString = rhs.m_internalString;
+        }
+
+        String::~String()
+        {
         }
 
         String& String::operator=(const String& rhs)
@@ -148,10 +154,38 @@ namespace EasyCpp
             return str;
         }
 
+        StringPtr String::SubString(int startIndex, int length) const
+        {
+            // Bounds checking.
+            if (startIndex < 0)
+            {
+                throw std::invalid_argument("startIndex ArgumentOutOfRange_StartIndex");
+            }
+
+            if (startIndex > this->m_internalString.length())
+            {
+                throw std::invalid_argument("startIndex ArgumentOutOfRange_StartIndexLargerThanLength");
+            }
+
+            if (length < 0)
+            {
+                throw std::invalid_argument("startIndex ArgumentOutOfRange_NegativeLength");
+            }
+
+            if (startIndex > this->m_internalString.length() - length)
+            {
+                throw std::invalid_argument("startIndex ArgumentOutOfRange_IndexLength");
+            }
+
+            StringPtr subStr(new String(this->m_internalString.substr(startIndex, length)));
+
+            return subStr;
+        }
+
         StringPtr String::Format(const String& format, const Params& args)
         {
             // Find place holder indexes.
-            vector<int> placeHolderIndexes;
+            map<long, String> placeHolderIndexes;
             int startIndex = 0;
             do
             {
@@ -167,7 +201,16 @@ namespace EasyCpp
                     break;
                 }
 
-                placeHolderIndexes.push_back(startIndex);
+                string placeHolderIndex = format.m_internalString.substr(startIndex + 1, endIndex - startIndex - 1);
+                long placeHolderIndexValue = atol(placeHolderIndex.c_str());
+                if (placeHolderIndexValue >= (long)args.size())
+                {
+                    throw std::invalid_argument("Format place holder indexes are out of range.");
+                }
+
+                string placeHolderString = format.m_internalString.substr(startIndex, endIndex - startIndex + 1);
+
+                placeHolderIndexes.insert(std::make_pair(placeHolderIndexValue, placeHolderString));
 
                 startIndex = endIndex;
             } while (true);
@@ -177,9 +220,16 @@ namespace EasyCpp
                 throw std::invalid_argument("Arguments count do not match the format string.");
             }
 
-            // TODO:
-
             StringPtr formattedString(new String(format));
+
+            for (size_t i = 0; i < args.size(); i++)
+            {
+                auto pit = placeHolderIndexes.find(i);
+
+                string argStr = args[i]->ToStdString();
+
+                formattedString = formattedString->Replace(pit->second, argStr);
+            }
 
             return formattedString;
         }

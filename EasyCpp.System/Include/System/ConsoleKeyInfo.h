@@ -15,6 +15,7 @@ namespace EasyCpp
         {
         public:
             ConsoleKeyInfo();
+            virtual ~ConsoleKeyInfo();
 
         private:
             ConsoleKeyInfo(ConsoleKeyInfo&) = delete;

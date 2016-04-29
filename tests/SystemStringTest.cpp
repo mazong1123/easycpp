@@ -2,6 +2,7 @@
 
 using std::string;
 using EasyCpp::System::String;
+using EasyCpp::System::StringPtr;
 
 namespace EasyCppTest
 {
@@ -140,6 +141,38 @@ namespace EasyCppTest
 
         // Act
         String actual = *testStr.Replace("el", "bb");
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringFormatMultipleArgsSuccessTest)
+    {
+        // Prepare
+        String formatStr("Hello, {0} and {1}");
+
+        String expected("Hello, world and easy cpp");
+
+        EasyCpp::System::Params params;
+        params.push_back(StringPtr(new String("world")));
+        params.push_back(StringPtr(new String("easy cpp")));
+
+        // Act
+        String actual = *String::Format(formatStr, params);
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringSubStringNormalArgsSuccessTest)
+    {
+        // Prepare
+        String testStr("Hello, easy cpp");
+
+        String expected("Hello");
+
+        // Act
+        String actual = *testStr.SubString(0, 5);
 
         // Assert
         EXPECT_EQ(expected, actual);

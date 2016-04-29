@@ -7,5 +7,9 @@ namespace EasyCpp
         ConsoleKeyInfo::ConsoleKeyInfo()
         {
         }
+
+        ConsoleKeyInfo::~ConsoleKeyInfo()
+        {
+        }
     }
 }
