@@ -21,6 +21,9 @@ class Program
         Console.Write(2.1);
 
         Console.Write("This is a string");
+        
+        String str = "test helloworld";
+        String replacedStr = str.Replace("helloworld", "easycpp");
     }
 }
     
@@ -31,6 +34,7 @@ Now with easycpp, we can write similar C++ code:
 #include "System\Console.h"
 
 using EasyCpp::System::Console;
+using EasyCpp::System::String;
 int main()
 {
     Console::Write(2);
@@ -40,6 +44,9 @@ int main()
     Console::Write(2.1);
 
     Console::Write("This is a string");
+    
+    String str = "test helloworld";
+    String replacedStr = *str.Replace("helloworld", "easycpp");
 
     return 0;
 }
