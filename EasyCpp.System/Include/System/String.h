@@ -37,6 +37,23 @@ namespace EasyCpp
 
             bool EndsWith(const String& value);
 
+            //
+            // Summary:
+            //     Returns a new string in which all occurrences of a specified string in the current 
+            //     instance are replaced with another specified string
+            //
+            // Parameters:
+            //   oldValue:
+            //     The string to be replaced.
+            //
+            //   newValue:
+            //   The string to replace all occurrences of oldValue.
+            //
+            // Return Value:
+            //   A string that is equivalent to the current string except that all instances of oldValue are replaced with newValue. 
+            //   If oldValue is not found in the current instance, the method returns the current instance unchanged.
+            StringPtr Replace(const String& oldValue, const String& newValue);
+
             virtual std::string ToStdString();
             virtual StringPtr ToString();
 

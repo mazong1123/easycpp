@@ -1,12 +1,13 @@
-#include <cstdarg>
 #include <ostream>
 #include <stdexcept>
+#include <algorithm>
 #include "System\String.h"
 
 using std::ostream;
 using std::shared_ptr;
 using std::vector;
 using std::string;
+using std::replace;
 
 namespace EasyCpp
 {
@@ -114,6 +115,25 @@ namespace EasyCpp
             }
 
             return std::equal(value.m_internalString.rbegin(), value.m_internalString.rend(), this->m_internalString.rbegin());
+        }
+
+        StringPtr String::Replace(const String& oldValue, const String& newValue)
+        {
+            // Copy new String instance.
+            StringPtr replacedString(new String(*this));
+
+            size_t startPos = replacedString->m_internalString.find(oldValue.m_internalString, 0);
+            while (startPos != std::string::npos)
+            {
+                replacedString->m_internalString.replace(startPos, oldValue.m_internalString.length(), newValue.m_internalString);
+                
+                // In case 'newValue' contains 'oldValue', like replacing 'x' with 'yx'
+                startPos += newValue.m_internalString.length(); 
+
+                startPos = replacedString->m_internalString.find(oldValue.m_internalString, startPos);
+            }
+
+            return replacedString;
         }
 
         string String::ToStdString()
