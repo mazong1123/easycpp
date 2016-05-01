@@ -18,7 +18,7 @@ namespace EasyCpp
         {
         }
 
-        string Object::ToStdString()
+        string Object::ToStdString() const
         {
             return "System.Object";
         }
