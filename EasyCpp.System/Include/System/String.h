@@ -57,8 +57,8 @@ namespace EasyCpp
             //   If oldValue is not found in the current instance, the method returns the current instance unchanged.
             StringPtr Replace(const String& oldValue, const String& newValue);
 
-            virtual std::string ToStdString();
-            virtual StringPtr ToString();
+            virtual std::string ToStdString() const;
+            virtual StringPtr ToString() const;
 
             static StringPtr Format(const String& format, const Params& args);
         private:

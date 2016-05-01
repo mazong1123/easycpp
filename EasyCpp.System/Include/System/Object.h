@@ -18,7 +18,7 @@ namespace EasyCpp
             Object();
             Object(const Object& rhs);
             virtual ~Object();
-            virtual std::string ToStdString();
+            virtual std::string ToStdString() const;
         };
     }
 }

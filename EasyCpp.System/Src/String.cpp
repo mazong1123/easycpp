@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <map>
 #include "System\String.h"
+#include "System\Convert.h"
 
 using std::ostream;
 using std::shared_ptr;
@@ -142,12 +143,12 @@ namespace EasyCpp
             return replacedString;
         }
 
-        string String::ToStdString()
+        string String::ToStdString() const
         {
             return this->m_internalString;
         }
 
-        StringPtr String::ToString()
+        StringPtr String::ToString() const
         {
             // TODO: Need enhancement here. We don't want to construct a new String object.
             StringPtr str(new String(*this));
@@ -202,7 +203,9 @@ namespace EasyCpp
                 }
 
                 StringPtr placeHolderIndex = format.SubString(startIndex + 1, endIndex - startIndex - 1);
-                long placeHolderIndexValue = atol(placeHolderIndex->m_internalString.c_str());
+                // long placeHolderIndexValue = atol(placeHolderIndex->m_internalString.c_str());
+                long placeHolderIndexValue = Convert::ToInt64(*placeHolderIndex, 10);
+                
                 if (placeHolderIndexValue >= (long)args.size())
                 {
                     throw std::invalid_argument("Format place holder indexes are out of range.");
