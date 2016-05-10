@@ -80,13 +80,17 @@ namespace EasyCpp
 
             StringPtr SubString(int startIndex, int length) const;
 
-            bool EndsWith(const String& value);
+            bool EndsWith(const String& value) const;
 
-            StringPtr Trim();
+            StringPtr Trim() const;
 
-            StringPtr TrimStart();
+            StringPtr TrimStart() const;
 
-            StringPtr TrimEnd();
+            StringPtr TrimStart(const std::vector<char>& trimChars) const;
+
+            StringPtr TrimEnd() const;
+
+            StringPtr TrimEnd(const std::vector<char>& trimChars) const;
 
             int Length() const;
 
@@ -119,7 +123,9 @@ namespace EasyCpp
                 TrimBoth = 2
             };
 
-            StringPtr TrimHelper(TrimType trimType);
+            StringPtr TrimHelper(const std::vector<char>& trimChars, TrimType trimType) const;
+
+            StringPtr TrimHelper(TrimType trimType) const;
 
             std::string m_internalString;
         };

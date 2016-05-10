@@ -118,7 +118,7 @@ namespace EasyCpp
             return locInt;
         }
 
-        bool String::EndsWith(const String& value)
+        bool String::EndsWith(const String& value) const
         {
             if (value.m_internalString.size() > this->m_internalString.size())
             {
@@ -128,19 +128,39 @@ namespace EasyCpp
             return std::equal(value.m_internalString.rbegin(), value.m_internalString.rend(), this->m_internalString.rbegin());
         }
 
-        StringPtr String::Trim()
+        StringPtr String::Trim() const
         {
             return this->TrimHelper(TrimBoth);
         }
 
-        StringPtr String::TrimStart()
+        StringPtr String::TrimStart() const
         {
             return this->TrimHelper(TrimHead);
         }
 
-        StringPtr String::TrimEnd()
+        StringPtr String::TrimStart(const std::vector<char>& trimChars) const
+        {
+            if (trimChars.empty())
+            {
+                return this->TrimStart();
+            }
+
+            return this->TrimHelper(trimChars, TrimHead);
+        }
+
+        StringPtr String::TrimEnd() const
         {
             return this->TrimHelper(TrimTail);
+        }
+
+        StringPtr String::TrimEnd(const std::vector<char>& trimChars) const
+        {
+            if (trimChars.empty())
+            {
+                return this->TrimEnd();
+            }
+
+            return this->TrimHelper(trimChars, TrimTail);
         }
 
         int String::Length() const
@@ -260,7 +280,71 @@ namespace EasyCpp
             return formattedString;
         }
 
-        StringPtr String::TrimHelper(TrimType trimType)
+        StringPtr String::TrimHelper(const std::vector<char>& trimChars, TrimType trimType) const
+        {
+            int len = this->Length();
+            int end = len - 1;
+            int start = 0;
+
+            int trimCharsLen = (int)trimChars.size();
+
+            if (trimType != TrimTail)
+            {
+                for (start = 0; start < len; start++)
+                {
+                    char ch = this->m_internalString[start];
+                    bool isMatched = false;
+
+                    for (int i = 0; i < trimCharsLen; i++)
+                    {
+                        if (trimChars[i] == ch)
+                        {
+                            isMatched = true;
+                            break;
+                        }
+                    }
+
+                    if (!isMatched)
+                    {
+                        // Current char does not match any trim chars.
+                        // We should stop the process now. The start value
+                        // indicates the start point of substring().
+                        break;
+                    }
+                }
+            }
+
+            if (trimType != TrimHead)
+            {
+                for (end = len - 1; end >= start; end--)
+                {
+                    char ch = this->m_internalString[end];
+                    bool isMatched = false;
+
+                    for (int i = 0; i < trimCharsLen; i++)
+                    {
+                        if (trimChars[i] == ch)
+                        {
+                            isMatched = true;
+                            break;
+                        }
+                    }
+                    if (!isMatched)
+                    { 
+                        // Current char does not match any trim chars.
+                        // We should stop the process now. The end value
+                        // indicates the end point of substring().
+                        break;
+                    }
+                }
+            }
+
+            StringPtr trimedStringPtr = StringPtr(new String(*this));
+
+            return trimedStringPtr->SubString(start, end - start + 1);
+        }
+
+        StringPtr String::TrimHelper(TrimType trimType) const
         {
             StringPtr trimedStringPtr = StringPtr(new String(*this));
 
