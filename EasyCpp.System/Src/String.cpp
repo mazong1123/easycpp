@@ -2,6 +2,10 @@
 #include <stdexcept>
 #include <algorithm>
 #include <map>
+#include <functional> 
+#include <cctype>
+#include <locale>
+
 #include "System\String.h"
 #include "System\Convert.h"
 
@@ -124,6 +128,26 @@ namespace EasyCpp
             return std::equal(value.m_internalString.rbegin(), value.m_internalString.rend(), this->m_internalString.rbegin());
         }
 
+        StringPtr String::Trim()
+        {
+            return this->TrimHelper(TrimBoth);
+        }
+
+        StringPtr String::TrimStart()
+        {
+            return this->TrimHelper(TrimHead);
+        }
+
+        StringPtr String::TrimEnd()
+        {
+            return this->TrimHelper(TrimTail);
+        }
+
+        int String::Length() const
+        {
+            return this->m_internalString.length();
+        }
+
         StringPtr String::Replace(const String& oldValue, const String& newValue)
         {
             // Copy new String instance.
@@ -163,7 +187,7 @@ namespace EasyCpp
                 throw std::invalid_argument("startIndex ArgumentOutOfRange_StartIndex");
             }
 
-            if (startIndex > this->m_internalString.length())
+            if (startIndex > (int)this->m_internalString.length())
             {
                 throw std::invalid_argument("startIndex ArgumentOutOfRange_StartIndexLargerThanLength");
             }
@@ -173,7 +197,7 @@ namespace EasyCpp
                 throw std::invalid_argument("startIndex ArgumentOutOfRange_NegativeLength");
             }
 
-            if (startIndex > this->m_internalString.length() - length)
+            if (startIndex > (int)this->m_internalString.length() - length)
             {
                 throw std::invalid_argument("startIndex ArgumentOutOfRange_IndexLength");
             }
@@ -203,7 +227,6 @@ namespace EasyCpp
                 }
 
                 StringPtr placeHolderIndex = format.SubString(startIndex + 1, endIndex - startIndex - 1);
-                // long placeHolderIndexValue = atol(placeHolderIndex->m_internalString.c_str());
                 long placeHolderIndexValue = Convert::ToInt64(*placeHolderIndex, 10);
                 
                 if (placeHolderIndexValue >= (long)args.size())
@@ -235,6 +258,34 @@ namespace EasyCpp
             }
 
             return formattedString;
+        }
+
+        StringPtr String::TrimHelper(TrimType trimType)
+        {
+            StringPtr trimedStringPtr = StringPtr(new String(*this));
+
+            switch (trimType)
+            {
+            case TrimHead:
+                trimedStringPtr->m_internalString.erase(trimedStringPtr->m_internalString.begin(),
+                    std::find_if(trimedStringPtr->m_internalString.begin(), trimedStringPtr->m_internalString.end(),
+                        std::not1(std::ptr_fun<int, int>(std::isspace))));
+                break;
+            case TrimTail:
+                trimedStringPtr->m_internalString.erase(std::find_if(trimedStringPtr->m_internalString.rbegin(), trimedStringPtr->m_internalString.rend(), 
+                    std::not1(std::ptr_fun<int, int>(std::isspace))).base(), trimedStringPtr->m_internalString.end());
+                break;
+            default:
+                trimedStringPtr->m_internalString.erase(trimedStringPtr->m_internalString.begin(),
+                    std::find_if(trimedStringPtr->m_internalString.begin(), trimedStringPtr->m_internalString.end(),
+                        std::not1(std::ptr_fun<int, int>(std::isspace))));
+
+                trimedStringPtr->m_internalString.erase(std::find_if(trimedStringPtr->m_internalString.rbegin(), trimedStringPtr->m_internalString.rend(),
+                    std::not1(std::ptr_fun<int, int>(std::isspace))).base(), trimedStringPtr->m_internalString.end());
+                break;
+            }
+
+            return trimedStringPtr;
         }
     }
 }
