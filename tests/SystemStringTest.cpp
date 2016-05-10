@@ -177,4 +177,46 @@ namespace EasyCppTest
         // Assert
         EXPECT_EQ(expected, actual);
     }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimSuccessTest)
+    {
+        // Prepare
+        String testStr("   Hello, easy cpp   ");
+
+        String expected("Hello, easy cpp");
+
+        // Act
+        String actual = *testStr.Trim();
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimStartSuccessTest)
+    {
+        // Prepare
+        String testStr("   Hello, easy cpp   ");
+
+        String expected("Hello, easy cpp   ");
+
+        // Act
+        String actual = *testStr.TrimStart();
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimEndSuccessTest)
+    {
+        // Prepare
+        String testStr("   Hello, easy cpp   ");
+
+        String expected("   Hello, easy cpp");
+
+        // Act
+        String actual = *testStr.TrimEnd();
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
 }
