@@ -219,4 +219,74 @@ namespace EasyCppTest
         // Assert
         EXPECT_EQ(expected, actual);
     }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimStartSpecificCharsSuccessTest)
+    {
+        // Prepare
+        String testStr("hhah   Hello, easy cpp   ");
+
+        String expected("ah   Hello, easy cpp   ");
+
+        std::vector<char> trimChars;
+        trimChars.push_back('h');
+
+        // Act
+        String actual = *testStr.TrimStart(trimChars);
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimStartSpecificMultipleCharsSuccessTest)
+    {
+        // Prepare
+        String testStr("hhah   Hello, easy cpp   ");
+
+        String expected("   Hello, easy cpp   ");
+
+        std::vector<char> trimChars;
+        trimChars.push_back('h');
+        trimChars.push_back('a');
+
+        // Act
+        String actual = *testStr.TrimStart(trimChars);
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimEndSpecificCharsSuccessTest)
+    {
+        // Prepare
+        String testStr("hhah   Hello, easy cpp   aahh");
+
+        String expected("hhah   Hello, easy cpp   aa");
+
+        std::vector<char> trimChars;
+        trimChars.push_back('h');
+
+        // Act
+        String actual = *testStr.TrimEnd(trimChars);
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
+
+    TEST_F(SystemStringTestFixture, SystemStringTrimEndSpecificMultipleCharsSuccessTest)
+    {
+        // Prepare
+        String testStr("hhah   Hello, easy cpp   aahah");
+
+        String expected("hhah   Hello, easy cpp   ");
+
+        std::vector<char> trimChars;
+        trimChars.push_back('h');
+        trimChars.push_back('a');
+
+        // Act
+        String actual = *testStr.TrimEnd(trimChars);
+
+        // Assert
+        EXPECT_EQ(expected, actual);
+    }
 }
