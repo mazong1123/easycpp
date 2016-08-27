@@ -10,7 +10,8 @@ namespace easycpp
         class File
         {
         public:
-            void copy(const std::string sourceFileName, const std::string destFileName);
+            static void Copy(const std::string& sourceFileName, const std::string& destFileName);
+            static bool Exists(const std::string& path);
         private:
             File()
             {
